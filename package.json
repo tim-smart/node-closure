@@ -1,0 +1,15 @@
+{
+  "name": "closure-compiler",
+  "description": "Bindings to Google's Closure Compiler",
+  "version": "0.1.0",
+  "author": "Tim-Smart",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/Tim-Smart/node-closure.git"
+  },
+  "engine": [ "node >=0.1.90" ],
+  "directories": {
+    "lib": "./lib/closure-compiler"
+  }
+}
+

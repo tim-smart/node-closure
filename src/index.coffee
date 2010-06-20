@@ -1,6 +1,5 @@
 spawn: require('child_process').spawn
 path: require 'path'
-sys: require 'sys'
 
 JAVA_PATH: exports.JAVA_PATH: 'java'
 JAR_PATH: exports.JAR_PATH: path.join __dirname, 'vendor/compiler.jar'
@@ -8,9 +7,11 @@ OPTIONS: exports.OPTIONS: {}
 
 exports.compile: (input, options, callback) ->
   if callback
-    result: Object.create OPTIONS
-    for name, option in options
-      result[name]: option
+    result: {}
+    Object.keys(OPTIONS).forEach (key) ->
+      result[key]: OPTIONS[key]
+    Object.keys(options).forEach (key) ->
+      result[key]: options[key]
     options: result
   else
     callback: options
@@ -18,9 +19,9 @@ exports.compile: (input, options, callback) ->
 
   args: ['-jar', JAR_PATH]
 
-  for name, option in options
-    args.push "--$name"
-    args.push "$option"
+  Object.keys(options).forEach (key) ->
+    args.push "--$key"
+    args.push "${options[key]}"
 
   compiler: spawn JAVA_PATH, args
   result: ''
