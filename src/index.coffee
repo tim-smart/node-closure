@@ -27,7 +27,7 @@ exports.compile = (input, options, callback) ->
   result = ''
 
   compiler.stdout.addListener 'data', (data) ->
-    result = + data
+    result += data
 
   compiler.addListener 'exit', (code) ->
     callback result
