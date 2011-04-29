@@ -20,7 +20,7 @@ exports.compile = (input, options, callback) ->
   args = ['-jar', JAR_PATH]
 
   Object.keys(options).forEach (key) ->
-    args.push "--$key"
+    args.push "--#{key}"
     args.push "#{options[key]}"
 
   compiler = spawn JAVA_PATH, args
