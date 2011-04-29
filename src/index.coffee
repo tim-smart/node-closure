@@ -15,7 +15,7 @@ exports.compile = (input, options, callback) ->
     options = result
   else
     callback = options
-    options = OPTIONS
+    options  = OPTIONS
 
   args = ['-jar', JAR_PATH]
 
@@ -24,13 +24,20 @@ exports.compile = (input, options, callback) ->
     args.push "${options[key]}"
 
   compiler = spawn JAVA_PATH, args
-  result = ''
+  stdout   = ''
+  stderr   = ''
 
-  compiler.stdout.addListener 'data', (data) ->
-    result += data
+  compiler.stdout.setEncoding 'utf8'
+  compiler.stderr.setEncoding 'utf8'
 
-  compiler.addListener 'exit', (code) ->
-    callback result
+  compiler.stdout.on 'data', (data) ->
+    stdout += data
 
-  compiler.stdin.write input
-  compiler.stdin.end()
+  compiler.stderr.on 'data', (data) ->
+    stderr += data
+
+  compiler.on 'exit', (code) ->
+    return callback new Error stderr if stderr.length > 0
+    callback null, stdout
+
+  compiler.stdin.end input
