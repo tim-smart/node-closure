@@ -21,7 +21,7 @@ exports.compile = (input, options, callback) ->
 
   Object.keys(options).forEach (key) ->
     args.push "--$key"
-    args.push "${options[key]}"
+    args.push "#{options[key]}"
 
   compiler = spawn JAVA_PATH, args
   stdout   = ''
