@@ -8,8 +8,6 @@
     "url": "http://github.com/Tim-Smart/node-closure.git"
   },
   "engine": [ "node >=0.1.90" ],
-  "directories": {
-    "lib": "./lib/closure-compiler"
-  }
+  "main": "./lib/closure-compiler"
 }
 
