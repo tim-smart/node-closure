@@ -37,7 +37,10 @@ exports.compile = (input, options, callback) ->
     stderr += data
 
   compiler.on 'exit', (code) ->
-    return callback new Error stderr if stderr.length > 0
-    callback null, stdout
+    if code isnt 0
+      error      = new Error stderr
+      error.code = code
+    else error   = null
+    callback error, stdout
 
   compiler.stdin.end input
