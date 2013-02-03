@@ -64,6 +64,6 @@ exports.compile = (input, options, callback) ->
       error      = new Error stderr
       error.code = code
     else error   = null
-    callback error, stdout
+    callback error, stdout, stderr
 
   compiler.stdin.end input
