@@ -1,6 +1,6 @@
 { "name"        : "closure-compiler"
 , "description" : "Bindings to Google's Closure Compiler"
-, "version"     : "0.1.3"
+, "version"     : "0.1.4"
 , "author"      : "Tim-Smart"
 , "repository"  :
   { "type"      : "git"
