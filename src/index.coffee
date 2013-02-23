@@ -40,7 +40,14 @@ exports.compile = (input, options, callback) ->
       result[key] = options[key]
     options = result
 
-  args = ['-jar', JAR_PATH]
+  args = []
+
+  if !options.jar
+    options.jar = JAR_PATH
+
+  args.push('-jar')
+  args.push(options.jar)
+  delete options.jar
 
   Object.keys(options).forEach (key) ->
     value = options[key]
