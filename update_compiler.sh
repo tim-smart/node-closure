@@ -4,7 +4,7 @@
 set -o pipefail
 
 LIST_URL="https://code.google.com/p/closure-compiler/downloads/list"
-LATEST_VERSION=$(curl "${LIST_URL}" | grep 'a href.*name=compiler-\d*.tar.gz' | sed -e s/.*compiler-// -e s/.tar.gz.*// | head -n 1)
+LATEST_VERSION=$(curl "${LIST_URL}" | grep 'a href.*name=compiler-[0-9]*.tar.gz' | sed -e s/.*compiler-// -e s/.tar.gz.*// | head -n 1)
 if [ "$?" != 0 ] || [ "" == "${LATEST_VERSION}" ]; then
     echo "Failed to fetch or parse the version list from ${LIST_URL}"
     exit 1
