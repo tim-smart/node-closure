@@ -30,17 +30,20 @@ if ! wget -O "${TMP_FILE}" "${EXPECTED_URL}"; then
   exit 1
 fi
 
-if ! tar -xvzf "${TMP_FILE}" --include "compiler.jar"; then
+mkdir tmp
+
+if ! tar -C tmp -xvzf "${TMP_FILE}"; then
   echo "Failed to extract the compiler.jar file from ${TMP_FILE}..."
   exit 1
 fi
 
 rm "${TMP_FILE}"
-mv "compiler.jar" "${OUTPUT_DIR}"
+mv "tmp/compiler.jar" "${OUTPUT_DIR}"
 
 MESSAGE="Updated compiler.jar to v${LATEST_VERSION}"
 git add "${OUTPUT_DIR}/compiler.jar"
 git commit -m "${MESSAGE}"
+git tag -a "closure-v${LATEST_VERSION}" -m "Updated closure to v${LATEST_VERSION}"
 
 # This chews up the package.json formatting
 # npm version patch --message "Version %s -- v${LATEST_VERSION}"
