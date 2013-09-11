@@ -24,13 +24,13 @@ if [ ! -d "${OUTPUT_DIR}" ]; then
 fi
 
 EXPECTED_URL="https://closure-compiler.googlecode.com/files/compiler-${LATEST_VERSION}.tar.gz"
-if ! wget -O "${TMP_FILE}" "${EXPECTED_URL}"; then
+if ! curl "${EXPECTED_URL}" > "${TMP_FILE}"; then
   echo "Failed to retrieve jar from ${EXPECTED_URL}..."
   rm "${TMP_FILE}"
   exit 1
 fi
 
-mkdir tmp
+mkdir -p tmp
 
 if ! tar -C tmp -xvzf "${TMP_FILE}"; then
   echo "Failed to extract the compiler.jar file from ${TMP_FILE}..."
@@ -39,6 +39,7 @@ fi
 
 rm "${TMP_FILE}"
 mv "tmp/compiler.jar" "${OUTPUT_DIR}"
+rm -rf tmp/
 
 MESSAGE="Updated compiler.jar to v${LATEST_VERSION}"
 git add "${OUTPUT_DIR}/compiler.jar"
