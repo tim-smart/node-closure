@@ -3,8 +3,13 @@
 # curl should fail the pipe
 set -o pipefail
 
-LIST_URL="https://code.google.com/p/closure-compiler/downloads/list"
-LATEST_VERSION=$(curl "${LIST_URL}" | grep 'a href.*name=compiler-[0-9]*.tar.gz' | sed -e s/.*compiler-// -e s/.tar.gz.*// | head -n 1)
+LIST_URL="https://code.google.com/p/closure-compiler/wiki/BinaryDownloads"
+version_pattern='closure-compiler/compiler-([0-9]*)\.tar\.gz'
+
+if [[ "$(curl "${LIST_URL}")" =~ ${version_pattern} ]]; then
+  LATEST_VERSION=${BASH_REMATCH[1]}
+fi
+
 if [ "$?" != 0 ] || [ "" == "${LATEST_VERSION}" ]; then
     echo "Failed to fetch or parse the version list from ${LIST_URL}"
     exit 1
@@ -23,7 +28,7 @@ if [ ! -d "${OUTPUT_DIR}" ]; then
   exit 1
 fi
 
-EXPECTED_URL="https://closure-compiler.googlecode.com/files/compiler-${LATEST_VERSION}.tar.gz"
+EXPECTED_URL="http://dl.google.com/closure-compiler/compiler-${LATEST_VERSION}.tar.gz"
 if ! curl "${EXPECTED_URL}" > "${TMP_FILE}"; then
   echo "Failed to retrieve jar from ${EXPECTED_URL}..."
   rm "${TMP_FILE}"
@@ -39,6 +44,7 @@ fi
 
 rm "${TMP_FILE}"
 mv "tmp/compiler.jar" "${OUTPUT_DIR}"
+exit
 rm -rf tmp/
 
 MESSAGE="Updated compiler.jar to v${LATEST_VERSION}"
