@@ -8,5 +8,6 @@
   }
 , "engine"      : [ "node >=0.4" ]
 , "main"        : "./lib/index.js"
+, "license"     : "MIT"
 }
 
