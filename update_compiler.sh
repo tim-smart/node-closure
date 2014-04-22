@@ -44,7 +44,6 @@ fi
 
 rm "${TMP_FILE}"
 mv "tmp/compiler.jar" "${OUTPUT_DIR}"
-exit
 rm -rf tmp/
 
 MESSAGE="Updated compiler.jar to v${LATEST_VERSION}"
