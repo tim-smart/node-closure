@@ -3,7 +3,7 @@
 # curl should fail the pipe
 set -o pipefail
 
-LIST_URL="https://code.google.com/p/closure-compiler/wiki/BinaryDownloads"
+LIST_URL="https://github.com/google/closure-compiler/wiki/Binary-Downloads"
 version_pattern='closure-compiler/compiler-([0-9]*)\.tar\.gz'
 
 if [[ "$(curl "${LIST_URL}")" =~ ${version_pattern} ]]; then
