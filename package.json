@@ -6,8 +6,10 @@
   { "type"      : "git"
   , "url"       : "git://github.com/tim-smart/node-closure.git"
   }
+, "dependencies": {
+    "google-closure-compiler": "x"
+}
 , "engine"      : [ "node >=0.10" ]
 , "main"        : "./lib/index.js"
 , "license"     : "MIT"
 }
-
