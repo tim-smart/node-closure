@@ -7,7 +7,7 @@
   , "url"       : "git://github.com/tim-smart/node-closure.git"
   }
 , "dependencies": {
-    "google-closure-compiler": "x"
+  "google-closure-compiler": "20150901.x"
 }
 , "engine"      : [ "node >=0.10" ]
 , "main"        : "./lib/index.js"
