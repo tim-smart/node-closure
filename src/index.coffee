@@ -25,7 +25,7 @@ spawn = require('child_process').spawn
 path  = require 'path'
 
 JAVA_PATH = exports.JAVA_PATH = 'java'
-JAR_PATH  = exports.JAR_PATH  = path.join __dirname, 'node_modules/google-closure-compiler/compiler.jar'
+JAR_PATH  = exports.JAR_PATH  = path.join __dirname, '../node_modules/google-closure-compiler/compiler.jar'
 OPTIONS   = exports.OPTIONS   = {}
 
 exports.compile = (input, options, callback) ->
@@ -58,8 +58,14 @@ exports.compile = (input, options, callback) ->
         args.push val
       return
 
+    # Boolean values: false means do not pass the flag at all.
+    if typeof value == 'boolean' && value == false
+      return
+
     args.push "--#{key}"
-    args.push value
+    # Boolean values; true means emit without value.
+    if value != true
+      args.push value
 
   compiler = spawn JAVA_PATH, args
   stdout   = ''

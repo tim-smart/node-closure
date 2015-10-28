@@ -13,6 +13,7 @@ process and returns the results in a callback.
     var options =
       { some    : 'flag'
       , values  : ['1', '2']
+      , 'checks-only' : true // Pass true for parameters that take no value.
       }
 
     function aftercompile (err, stdout, stderr) {
