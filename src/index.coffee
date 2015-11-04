@@ -25,7 +25,8 @@ spawn = require('child_process').spawn
 path  = require 'path'
 
 JAVA_PATH = exports.JAVA_PATH = 'java'
-JAR_PATH  = exports.JAR_PATH  = path.join __dirname, '../node_modules/google-closure-compiler/compiler.jar'
+# Load `compiler.jar` using Node's regular lookup mechanism.
+JAR_PATH  = exports.JAR_PATH  = require.resolve('google-closure-compiler/compiler.jar');
 OPTIONS   = exports.OPTIONS   = {}
 
 exports.compile = (input, options, callback) ->
