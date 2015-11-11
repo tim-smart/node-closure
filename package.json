@@ -7,8 +7,8 @@
     "type": "git",
     "url": "git://github.com/tim-smart/node-closure.git"
   },
-  "dependencies": {
-    "google-closure-compiler": "20150901.x"
+  "peerDependencies": {
+    "google-closure-compiler": ">= 20150901.0.0"
   },
   "engine": [
     "node >=0.10"
